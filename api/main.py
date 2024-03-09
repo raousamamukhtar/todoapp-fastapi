@@ -15,6 +15,7 @@ import os
 load_dotenv()
 
 key = os.getenv("db-key")
+baseurl = os.getenv("url")
 conn_str = f'{key}'
 engine = create_engine(conn_str)
 
@@ -23,7 +24,7 @@ engine = create_engine(conn_str)
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Adjust this to your frontend's address
+    allow_origins=[baseurl],  # Adjust this to your frontend's address
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

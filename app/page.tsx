@@ -9,6 +9,7 @@ interface TodoItem {
   completed: boolean;
 }
 
+const url = process.env.url
 const TodoApp: React.FC = () => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [error, setError] = useState<string>('');
@@ -19,7 +20,7 @@ const TodoApp: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/todos/');
+      const response = await fetch('${url}/todos/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -37,7 +38,7 @@ const TodoApp: React.FC = () => {
 
   const handleDeleteTodo = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/todos/${id}`, {
+      const response = await fetch(`${url}/todos/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -52,7 +53,7 @@ const TodoApp: React.FC = () => {
 
   const handleCreateTodo = async () => {
     try {
-      const response = await fetch('http://localhost:8000/todos/', {
+      const response = await fetch('${url}/todos/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const TodoApp: React.FC = () => {
 
   const handleUpdateTodo = async (id: number, updatedTodo: Partial<TodoItem>) => {
     try {
-      const response = await fetch(`http://localhost:8000/todos/${id}`, {
+      const response = await fetch(`${url}/todos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ const TodoApp: React.FC = () => {
 
   const handleSaveEdit = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/todos/${id}`, {
+      const response = await fetch(`${url}/todos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
