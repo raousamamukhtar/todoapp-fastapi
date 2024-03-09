@@ -1,11 +1,23 @@
 # main.py
 from fastapi import FastAPI, HTTPException
 from sqlmodel import Session
+import os
+from dotenv import load_dotenv
 from sqlmodel import select
 from typing import Optional
 from sqlmodel import Field, SQLModel
 from sqlmodel import create_engine, SQLModel
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+from sqlalchemy import create_engine,text
+import os
+
+load_dotenv()
+
+key = os.getenv("db-key")
+conn_str = f'{key}'
+engine = create_engine(conn_str)
+
 
 
 app = FastAPI()
@@ -18,8 +30,6 @@ app.add_middleware(
 )
 
 
-DATABASE_URL = "postgresql://raousamamukhtar:OQaEW84GtSZn@ep-shy-dust-a53jmoy2.us-east-2.aws.neon.tech/neondb?sslmode=require"
-engine = create_engine(DATABASE_URL)
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
