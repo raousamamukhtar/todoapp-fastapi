@@ -11,3 +11,6 @@ db-key = ""
 then run command npm i 
 
 and then run command npm run dev your project will be start working
+
+fastapi will run on port 8000
+frontend will run on port 3000
