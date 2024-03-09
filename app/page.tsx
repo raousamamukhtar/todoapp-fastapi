@@ -9,7 +9,6 @@ interface TodoItem {
   completed: boolean;
 }
 
-const url = process.env.url
 const TodoApp: React.FC = () => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [error, setError] = useState<string>('');
@@ -20,7 +19,7 @@ const TodoApp: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`/todos/`);
+      const response = await fetch('http://localhost:8000/todos/');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -38,7 +37,7 @@ const TodoApp: React.FC = () => {
 
   const handleDeleteTodo = async (id: number) => {
     try {
-      const response = await fetch(`/todos/${id}`, {
+      const response = await fetch(`http://localhost:8000/todos/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -53,7 +52,7 @@ const TodoApp: React.FC = () => {
 
   const handleCreateTodo = async () => {
     try {
-      const response = await fetch(`/todos/`, {
+      const response = await fetch('http://localhost:8000/todos/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +77,7 @@ const TodoApp: React.FC = () => {
 
   const handleUpdateTodo = async (id: number, updatedTodo: Partial<TodoItem>) => {
     try {
-      const response = await fetch(`/todos/${id}`, {
+      const response = await fetch(`http://localhost:8000/todos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +101,7 @@ const TodoApp: React.FC = () => {
 
   const handleSaveEdit = async (id: number) => {
     try {
-      const response = await fetch(`/todos/${id}`, {
+      const response = await fetch(`http://localhost:8000/todos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -182,7 +181,7 @@ const TodoApp: React.FC = () => {
                 )}
               </div>
               <p className="text-sm text-gray-600">Description : {todo.description || 'No Description'}</p>
-              <p className={`text-sm ${todo.completed ? 'text-green-600' : 'text-red-600'}`}>Status : {todo.completed ? 'Completed' : 'Not Completed'}</p>
+              <p className={`text-sm ${todo.completed ? 'text-green-600' : 'text-red-600'}`}>Status :{todo.completed ? 'Completed' : 'Not Completed'}</p>
             </li>
           ))}
         </ul>
