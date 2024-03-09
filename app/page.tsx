@@ -20,7 +20,7 @@ const TodoApp: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('${url}/todos/');
+      const response = await fetch(`${url}/todos/`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -53,7 +53,7 @@ const TodoApp: React.FC = () => {
 
   const handleCreateTodo = async () => {
     try {
-      const response = await fetch('${url}/todos/', {
+      const response = await fetch(`${url}/todos/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
